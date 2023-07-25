@@ -9,20 +9,38 @@ namespace SquirrelNUnit
         {
         }
 
-        [Test]
-        public void Move_ShouldReturn5() // 5 da es ein statischer Test ist
+        
+
+        [TestCase(0, 3, 3)]
+        [TestCase(3, 4, 7)]
+        [TestCase(4, 5, 9)]
+        [TestCase(6, 6, 12)]
+        [TestCase(6, 2, 8)]
+        [TestCase(2, 1, 3)]
+        public void Move_ShouldReturnExpectedField(int position, int steps, int expected) // statischer Test
         {
-            var result = Move(0, 5);
-            result.Should().Be(5);
-        }
-        [Test]
-        public void Move_toTheEnd() 
-        {
-            int endposition = getEndposition(); //endposition is 16
-            var result = Move(15, 5);
-            result.Should().Be(16);
+            var result = Move(position, steps);
+            result.Should().Be(expected);
         }
 
+        [Test]
+        public void Move_toTheEnd()
+        {
+            var result = Move(14, 5);
+            result.Should().Be(getEndposition()); //endposition is 15
+        }
+
+        [Test]
+        public void RollTheDice_returnsInRange()
+        {
+            var result = RollTheDice();
+            result.Should().BeInRange(1, 6);
+        }
+
+        public int RollTheDice()
+        {
+            return 0;
+        }
 
         public int Move(int position, int steps)
         {
@@ -36,7 +54,7 @@ namespace SquirrelNUnit
 
         public int getEndposition()
         {
-            return 16;
+            return 15;
         }
 
 

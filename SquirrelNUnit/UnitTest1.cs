@@ -17,7 +17,7 @@ namespace SquirrelNUnit
         [TestCase(6, 6, 12)]
         [TestCase(6, 2, 8)]
         [TestCase(2, 1, 3)]
-        public void Move_ShouldReturnExpectedField(int position, int steps, int expected) // statischer Test
+        public void Move_returnsExpectedField(int position, int steps, int expected) // statischer Test
         {
             var result = Move(position, steps);
             result.Should().Be(expected);
@@ -65,7 +65,7 @@ namespace SquirrelNUnit
         }
 
         [Test]
-        public void Test_RollDiceAndMove()
+        public void RollDiceAndMove_returnsInRange()
         {
             var result = RollDiceAndMove(0);
             result.Should().BeInRange(1, 6);
@@ -102,7 +102,5 @@ namespace SquirrelNUnit
         {
             return 15;
         }
-
-
     }
 }

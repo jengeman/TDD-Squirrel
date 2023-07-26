@@ -8,7 +8,14 @@ namespace SnakesAndLadders
 {
     public class PieceMover
     {
-        public static int RollDiceAndMove(int position)
+        private IDiceRoller _diceRoller;
+
+        public PieceMover(IDiceRoller diceRoller)
+        {
+            _diceRoller = diceRoller;
+        }
+
+        public int RollDiceAndMove(int position)
         {
             var diceRoller = new DiceRoller();
             var random = diceRoller.RollDice();
@@ -17,7 +24,7 @@ namespace SnakesAndLadders
             return newPosition;
         }
 
-        public static int Move(int position, int steps)
+        public int Move(int position, int steps)
         {
             int returnValue = position + steps;
             if (returnValue > getEndposition())

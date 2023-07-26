@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SnakesAndLadders
 {
-    public class DiceRoller
+    public interface IDiceRoller
+    {
+        int RollDice();
+    }
+
+    public class DiceRoller : IDiceRoller
     {
         private Random _random; // _ kennzeichnet oft private Variablen
 

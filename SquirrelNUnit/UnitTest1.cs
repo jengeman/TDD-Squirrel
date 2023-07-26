@@ -5,9 +5,12 @@ namespace SquirrelNUnit
 {
     public class Tests
     {
+        private PieceMover _sut; // System under test --> spart Codezeilen
         [SetUp]
         public void Setup()
         {
+            var diceRoller = new DiceRoller();
+            _sut = new PieceMover(diceRoller);
         }
 
         [TestCase(0, 3, 3)]
@@ -18,14 +21,14 @@ namespace SquirrelNUnit
         [TestCase(2, 1, 3)]
         public void Move_returnsExpectedField(int position, int steps, int expected) // statischer Test
         {
-            var result = PieceMover.Move(position, steps);
+            var result = _sut.Move(position, steps);
             result.Should().Be(expected);
         }
 
         [Test]
         public void Move_toTheEnd()
         {
-            var result = PieceMover.Move(14, 5);
+            var result = _sut.Move(14, 5);
             result.Should().Be(PieceMover.getEndposition()); //endposition is 15
         }
 
@@ -69,7 +72,7 @@ namespace SquirrelNUnit
         [Test]
         public void RollDiceAndMove_returnsInRange()
         {
-            var result = PieceMover.RollDiceAndMove(0);
+            var result = _sut.RollDiceAndMove(0);
             result.Should().BeInRange(1, 6);
         }
 

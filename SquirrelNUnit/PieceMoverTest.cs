@@ -1,16 +1,19 @@
 using FluentAssertions;
 using SnakesAndLadders;
+using FakeItEasy;
 
 namespace SquirrelNUnit
 {
-    public class Tests
+    public class PieceMoverTest
     {
         private PieceMover _sut; // System under test --> spart Codezeilen
+        private IDiceRoller _diceRoller;
+
         [SetUp]
         public void Setup()
         {
-            var diceRoller = new DiceRoller();
-            _sut = new PieceMover(diceRoller);
+            _diceRoller = A.Fake<IDiceRoller>(); // durch das Paket "FakeItEasy"
+            _sut = new PieceMover(_diceRoller);
         }
 
         [TestCase(0, 3, 3)]
@@ -45,7 +48,6 @@ namespace SquirrelNUnit
         public void RollDice_returnsAllNumbers()
         {
             var results = new List<int>();
-            //int[] array = new int[6]; 
 
             for(int i = 0; i < 100; i++)
             {
@@ -53,7 +55,6 @@ namespace SquirrelNUnit
                 var current = diceRoller.RollDice();
                 
                 results.Add(current);
-                //array[current + 1] += 1;
             }
 
             results.Should().Contain(1);
@@ -62,23 +63,22 @@ namespace SquirrelNUnit
             results.Should().Contain(4);
             results.Should().Contain(5);
             results.Should().Contain(6);
-            //for(int i = 0; i<6; i++)
-            //{
-            //    System.Console.WriteLine(array[i]);
-            //}
-            
         }
+
+        //[Test] // Dieser Test ist mit dem fake RolleDice nicht mehr notwendig
+        //public void RollDiceAndMove_returnsInRange()
+        //{
+        //    var result = _sut.RollDiceAndMove(0);
+        //    result.Should().BeInRange(1, 6);
+        //}
 
         [Test]
-        public void RollDiceAndMove_returnsInRange()
+        public void RollDiceAndMove_returns4()
         {
+            A.CallTo( () => _diceRoller.RollDice()).Returns(4); // da _diceRoller fake ist, gibt es hier wie gewollte eine 4 zurück
             var result = _sut.RollDiceAndMove(0);
-            result.Should().BeInRange(1, 6);
+            result.Should().Be(4);
         }
-
-
-        
     }
 
-    
 }

@@ -17,8 +17,7 @@ namespace SnakesAndLadders
 
         public int RollDiceAndMove(int position)
         {
-            var diceRoller = new DiceRoller();
-            var random = diceRoller.RollDice();
+            var random = _diceRoller.RollDice();
             var newPosition = Move(position, random);
 
             return newPosition;

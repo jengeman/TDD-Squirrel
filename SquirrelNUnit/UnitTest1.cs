@@ -73,7 +73,7 @@ namespace SquirrelNUnit
 
         // --- ^tests, v methods ---
 
-        public int RollDiceAndMove(int position)
+        public static int RollDiceAndMove(int position)
         {
             var random = RollDice();
             var newPosition = Move(position, random);
@@ -81,14 +81,14 @@ namespace SquirrelNUnit
             return newPosition;
         }
 
-        public int RollDice()
+        public static int RollDice()
         {
             var random = new Random();
             var result = random.Next(1, 7);
             return result;
         }
 
-        public int Move(int position, int steps)
+        public static int Move(int position, int steps)
         {
             int returnValue = position + steps;
             if(returnValue > getEndposition())
@@ -98,7 +98,7 @@ namespace SquirrelNUnit
             return returnValue;
         }
 
-        public int getEndposition()
+        public static int getEndposition()
         {
             return 15;
         }

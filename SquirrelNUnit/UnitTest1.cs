@@ -71,11 +71,14 @@ namespace SquirrelNUnit
             result.Should().BeInRange(1, 6);
         }
 
-        // ^tests, v methods
+        // --- ^tests, v methods ---
 
         public int RollDiceAndMove(int position)
         {
-            return 0;
+            var random = RollDice();
+            var newPosition = Move(position, random);
+
+            return newPosition;
         }
 
         public int RollDice()

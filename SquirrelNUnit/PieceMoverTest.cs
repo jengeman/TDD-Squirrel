@@ -14,8 +14,8 @@ namespace SquirrelNUnit
         public void Setup()
         {
             _diceRoller = A.Fake<IDiceRoller>(); // durch das Paket "FakeItEasy"
-            _sut = new PieceMover(_diceRoller);
-            _board = new Board(4);
+            _board = new Board(4); 
+            _sut = new PieceMover(_diceRoller, _board);
         }
 
         [TestCase(0, 3, 3)]
@@ -54,12 +54,5 @@ namespace SquirrelNUnit
             var result = _sut.Move(14, 5);
             result.Should().Be(_board.getEndposition()); //endposition is 15
         }
-
-        [Test]
-        public void getEndposition_shouldReturn15()
-        {
-            var result = _board.getEndposition();
-            result.Should().Be(15);
-        }        
     }
 }

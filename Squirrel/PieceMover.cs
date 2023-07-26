@@ -11,10 +11,10 @@ namespace SnakesAndLadders
         private IDiceRoller _diceRoller;
         private Board _board;
 
-        public PieceMover(IDiceRoller diceRoller)
+        public PieceMover(IDiceRoller diceRoller, Board board)
         {
             _diceRoller = diceRoller;
-            _board = new Board(4);
+            _board = board;
         }
 
         public int RollDiceAndMove(int position)

@@ -10,8 +10,6 @@ namespace SquirrelNUnit
         {
         }
 
-        
-
         [TestCase(0, 3, 3)]
         [TestCase(3, 4, 7)]
         [TestCase(4, 5, 9)]
@@ -34,7 +32,8 @@ namespace SquirrelNUnit
         [Test]
         public void RollDice_returnsInRange()
         {
-            var result = PieceMover.RollDice();
+            var diceRoller = new DiceRoller();
+            var result = diceRoller.RollDice();
             result.Should().BeInRange(1, 6);
             result.Should().BeOfType(typeof(int));
         }
@@ -47,7 +46,9 @@ namespace SquirrelNUnit
 
             for(int i = 0; i < 100; i++)
             {
-                var current = PieceMover.RollDice();
+                var diceRoller = new DiceRoller();
+                var current = diceRoller.RollDice();
+                
                 results.Add(current);
                 //array[current + 1] += 1;
             }

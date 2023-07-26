@@ -10,17 +10,11 @@ namespace SnakesAndLadders
     {
         public static int RollDiceAndMove(int position)
         {
-            var random = RollDice();
+            var diceRoller = new DiceRoller();
+            var random = diceRoller.RollDice();
             var newPosition = Move(position, random);
 
             return newPosition;
-        }
-
-        public static int RollDice()
-        {
-            var random = new Random();
-            var result = random.Next(1, 7);
-            return result;
         }
 
         public static int Move(int position, int steps)

@@ -9,10 +9,12 @@ namespace SnakesAndLadders
     public class PieceMover
     {
         private IDiceRoller _diceRoller;
+        private Board _board;
 
         public PieceMover(IDiceRoller diceRoller)
         {
             _diceRoller = diceRoller;
+            _board = new Board(4);
         }
 
         public int RollDiceAndMove(int position)
@@ -26,16 +28,12 @@ namespace SnakesAndLadders
         public int Move(int position, int steps)
         {
             int returnValue = position + steps;
-            if (returnValue > getEndposition())
+            if (returnValue > _board.getEndposition())
             {
-                returnValue = getEndposition();
+                returnValue = _board.getEndposition();
             }
             return returnValue;
         }
 
-        public static int getEndposition()
-        {
-            return 15;
-        }
     }
 }

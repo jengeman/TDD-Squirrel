@@ -8,12 +8,14 @@ namespace SquirrelNUnit
     {
         private PieceMover _sut; // System under test --> spart Codezeilen
         private IDiceRoller _diceRoller;
+        private Board _board;
 
         [SetUp]
         public void Setup()
         {
             _diceRoller = A.Fake<IDiceRoller>(); // durch das Paket "FakeItEasy"
             _sut = new PieceMover(_diceRoller);
+            _board = new Board(4);
         }
 
         [TestCase(0, 3, 3)]
@@ -28,12 +30,7 @@ namespace SquirrelNUnit
             result.Should().Be(expected);
         }
 
-        [Test]
-        public void Move_toTheEnd()
-        {
-            var result = _sut.Move(14, 5);
-            result.Should().Be(PieceMover.getEndposition()); //endposition is 15
-        }
+      
 
 
         //[Test] // Dieser Test ist mit dem fake RolleDice nicht mehr notwendig
@@ -50,6 +47,19 @@ namespace SquirrelNUnit
             var result = _sut.RollDiceAndMove(0);
             result.Should().Be(4);
         }
-    }
 
+        [Test]
+        public void Move_toTheEnd()
+        {
+            var result = _sut.Move(14, 5);
+            result.Should().Be(_board.getEndposition()); //endposition is 15
+        }
+
+        [Test]
+        public void getEndposition_shouldReturn15()
+        {
+            var result = _board.getEndposition();
+            result.Should().Be(15);
+        }        
+    }
 }

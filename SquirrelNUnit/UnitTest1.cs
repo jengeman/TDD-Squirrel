@@ -31,15 +31,58 @@ namespace SquirrelNUnit
         }
 
         [Test]
-        public void RollTheDice_returnsInRange()
+        public void RollDice_returnsInRange()
         {
-            var result = RollTheDice();
+            var result = RollDice();
+            result.Should().BeInRange(1, 6);
+            result.Should().BeOfType(typeof(int));
+        }
+
+        [Test]
+        public void RollDice_returnsAllNumbers()
+        {
+            var results = new List<int>();
+            //int[] array = new int[6]; 
+
+            for(int i = 0; i < 100; i++)
+            {
+                var current = RollDice();
+                results.Add(current);
+                //array[current + 1] += 1;
+            }
+
+            results.Should().Contain(1);
+            results.Should().Contain(2);
+            results.Should().Contain(3);
+            results.Should().Contain(4);
+            results.Should().Contain(5);
+            results.Should().Contain(6);
+            //for(int i = 0; i<6; i++)
+            //{
+            //    System.Console.WriteLine(array[i]);
+            //}
+            
+        }
+
+        [Test]
+        public void Test_RollDiceAndMove()
+        {
+            var result = RollDiceAndMove(0);
             result.Should().BeInRange(1, 6);
         }
 
-        public int RollTheDice()
+        // ^tests, v methods
+
+        public int RollDiceAndMove(int position)
         {
             return 0;
+        }
+
+        public int RollDice()
+        {
+            var random = new Random();
+            var result = random.Next(1, 7);
+            return result;
         }
 
         public int Move(int position, int steps)

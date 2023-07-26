@@ -35,35 +35,6 @@ namespace SquirrelNUnit
             result.Should().Be(PieceMover.getEndposition()); //endposition is 15
         }
 
-        [Test]
-        public void RollDice_returnsInRange()
-        {
-            var diceRoller = new DiceRoller();
-            var result = diceRoller.RollDice();
-            result.Should().BeInRange(1, 6);
-            result.Should().BeOfType(typeof(int));
-        }
-
-        [Test]
-        public void RollDice_returnsAllNumbers()
-        {
-            var results = new List<int>();
-
-            for(int i = 0; i < 100; i++)
-            {
-                var diceRoller = new DiceRoller();
-                var current = diceRoller.RollDice();
-                
-                results.Add(current);
-            }
-
-            results.Should().Contain(1);
-            results.Should().Contain(2);
-            results.Should().Contain(3);
-            results.Should().Contain(4);
-            results.Should().Contain(5);
-            results.Should().Contain(6);
-        }
 
         //[Test] // Dieser Test ist mit dem fake RolleDice nicht mehr notwendig
         //public void RollDiceAndMove_returnsInRange()

@@ -1,4 +1,5 @@
 using FluentAssertions;
+using SnakesAndLadders;
 
 namespace SquirrelNUnit
 {
@@ -19,21 +20,21 @@ namespace SquirrelNUnit
         [TestCase(2, 1, 3)]
         public void Move_returnsExpectedField(int position, int steps, int expected) // statischer Test
         {
-            var result = Move(position, steps);
+            var result = PieceMover.Move(position, steps);
             result.Should().Be(expected);
         }
 
         [Test]
         public void Move_toTheEnd()
         {
-            var result = Move(14, 5);
-            result.Should().Be(getEndposition()); //endposition is 15
+            var result = PieceMover.Move(14, 5);
+            result.Should().Be(PieceMover.getEndposition()); //endposition is 15
         }
 
         [Test]
         public void RollDice_returnsInRange()
         {
-            var result = RollDice();
+            var result = PieceMover.RollDice();
             result.Should().BeInRange(1, 6);
             result.Should().BeOfType(typeof(int));
         }
@@ -46,7 +47,7 @@ namespace SquirrelNUnit
 
             for(int i = 0; i < 100; i++)
             {
-                var current = RollDice();
+                var current = PieceMover.RollDice();
                 results.Add(current);
                 //array[current + 1] += 1;
             }
@@ -67,40 +68,13 @@ namespace SquirrelNUnit
         [Test]
         public void RollDiceAndMove_returnsInRange()
         {
-            var result = RollDiceAndMove(0);
+            var result = PieceMover.RollDiceAndMove(0);
             result.Should().BeInRange(1, 6);
         }
 
-        // --- ^tests, v methods ---
 
-        public static int RollDiceAndMove(int position)
-        {
-            var random = RollDice();
-            var newPosition = Move(position, random);
-
-            return newPosition;
-        }
-
-        public static int RollDice()
-        {
-            var random = new Random();
-            var result = random.Next(1, 7);
-            return result;
-        }
-
-        public static int Move(int position, int steps)
-        {
-            int returnValue = position + steps;
-            if(returnValue > getEndposition())
-            {
-                returnValue = getEndposition();
-            }
-            return returnValue;
-        }
-
-        public static int getEndposition()
-        {
-            return 15;
-        }
+        
     }
+
+    
 }
